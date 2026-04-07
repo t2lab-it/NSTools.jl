@@ -170,8 +170,8 @@ function set_flow!(
     end
 
     # Inverse Fourier transform
-    ux = f.ifftfunc(ux_f)
-    uy = f.ifftfunc(uy_f)
+    ux = real(f.ifftfunc(ux_f))
+    uy = real(f.ifftfunc(uy_f))
 
     return ux, uy
 end
@@ -270,8 +270,8 @@ function set_flow!(
         end
     end
 
-    ux = f.ifftfunc(û) * n_total
-    uy = f.ifftfunc(v̂) * n_total
+    ux = real(f.ifftfunc(û)) * n_total
+    uy = real(f.ifftfunc(v̂)) * n_total
 
     return ux, uy
 
