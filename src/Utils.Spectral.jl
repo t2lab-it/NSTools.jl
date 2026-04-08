@@ -41,9 +41,13 @@ function energy_spectral(
     uy::Array
 )
 
+    # wavenumber grid
+    grid = size(ux)
+    n_total = grid[1] * grid[2]
+
     # fourier transform
-    ux_f = FFTW.fft(ux)
-    uy_f = FFTW.fft(uy)
+    ux_f = FFTW.fft(ux) / n_total
+    uy_f = FFTW.fft(uy) / n_total
 
     # energy in spectral space
     E_f = @. ux_f * conj(ux_f) / 2 + uy_f * conj(uy_f) / 2
@@ -61,6 +65,7 @@ function prod_spectral(
     grid = size(ux)
     kx = fftfreq(grid[1], grid[1])
     ky = fftfreq(grid[2], grid[2])
+    n_total = grid[1] * grid[2]
 
     # fourier transform
     ux_f = FFTW.fft(ux)
@@ -85,8 +90,11 @@ function prod_spectral(
     T2 = ux .* FFTW.ifft(uydx_f) + uy .* FFTW.ifft(uydy_f)
 
     # Fourier transform of the nonlinear term
-    T1_f = FFTW.fft(T1)
-    T2_f = FFTW.fft(T2)
+    T1_f = FFTW.fft(T1) / n_total
+    T2_f = FFTW.fft(T2) / n_total
+    # division for normalization
+    ux_f = ux_f / n_total
+    uy_f = uy_f / n_total
 
     # nonlinear term in spectral space
     T_f = @. T1_f * conj(ux_f) / 2 + T2_f * conj(uy_f) / 2
