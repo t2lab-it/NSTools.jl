@@ -11,24 +11,29 @@ function generate_ticks(x)
     ticks = step*n_start:step:step*n_end
 
     labels = []
-    for i in 0:num_ticks
+    idx = n_start
+    for i in 1:num_ticks
         # reduction
-        gcd_value = gcd(i, 2)  # "2" comes from the denominator of the step π/2
-        num_simplified = i ÷ gcd_value
-        # println("i=", i, " num_simplified=", num_simplified, " gcd_value=", gcd_value)
+        gcd_value = gcd(idx, 2)  # "2" comes from the denominator of the step π/2
 
         # Create label
-        if num_simplified == 0
+        if idx == 0
             push!(labels, L"0")  # 0π -> 0
-        elseif num_simplified == 1 && gcd_value == 1
+        elseif idx == 1
             push!(labels, L"\pi/2")  # 1π/2 -> π/2
-        elseif num_simplified == 1 && gcd_value == 2
-            push!(labels, L"\pi")  # 1π -> π
+        elseif idx == 2
+            push!(labels, L"\pi")  # 2π/2 -> π
+        elseif idx == -1
+            push!(labels, L"-\pi/2")  # 1π/2 -> π/2
+        elseif idx == -2
+            push!(labels, L"-\pi")  # 2π/2 -> π
         elseif gcd_value == 2
-            push!(labels, L"%$num_simplified\pi")  # nπ
+            push!(labels, L"%$(idx÷2)\pi")  # nπ
         elseif gcd_value == 1
-            push!(labels, L"%$num_simplified\pi/2")  # nπ/2
+            push!(labels, L"%$(idx)\pi/2")  # nπ/2
         end
+
+        idx += 1
     end
 
     return ticks, labels
