@@ -6,7 +6,7 @@ export make_spectral
 export energy_spectral, prod_spectral
 
 function make_spectral(
-    E_f::Array{Complex{AbstractFloat},2},
+    E_f::Array,
 )
 
     # wavenumber grid
