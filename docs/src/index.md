@@ -4,7 +4,7 @@ CurrentModule = NSTools
 
 # NSTools
 
-Documentation for [NSTools](https://github.com/tkrhsmt/NSTools.jl).
+Documentation for [NSTools](https://github.com/t2lab-it/NSTools.jl).
 
 ```@index
 ```
