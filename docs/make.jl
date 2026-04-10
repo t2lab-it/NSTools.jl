@@ -8,7 +8,7 @@ makedocs(;
     authors="T. Hashimoto",
     sitename="NSTools.jl",
     format=Documenter.HTML(;
-        canonical="https://tkrhsmt.github.io/NSTools.jl",
+        canonical="https://t2lab-it.github.io/NSTools.jl",
         edit_link="main",
         assets=String[],
     ),
@@ -18,6 +18,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/tkrhsmt/NSTools.jl",
+    repo="github.com/t2lab-it/NSTools.jl",
     devbranch="main",
 )
